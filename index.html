@@ -24,12 +24,38 @@
                 <h2>Products</h2>
                 <input type="text" id="product-search" oninput="filterProducts()" placeholder="Search products...">
                 <button onclick="showAddProductForm()">Add Product</button>
-                <div id="product-list"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Contract Address</th>
+                            <th>Function Call</th>
+                            <th>Function Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list"></tbody>
+                </table>
             </div>
             <div id="policies" class="tab-content">
                 <h2>Policies</h2>
                 <button onclick="showAddPolicyForm()">Add Policy</button>
-                <div id="policy-list"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Detail</th>
+                            <th>Products</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="policy-list"></tbody>
+                </table>
             </div>
             <div id="commex" class="tab-content">
                 <h2>Commex</h2>

@@ -1,8 +1,19 @@
 // Products
 let productIdCounter = 1;
+let products = [];
 
 function showAddProductForm() {
     document.getElementById('add-product-form').style.display = 'block';
+}
+
+function toggleOnChainFields() {
+    var productType = document.getElementById('product-type').value;
+    var onChainFields = document.getElementById('onchain-fields');
+    if (productType === 'onchain') {
+        onChainFields.style.display = 'block';
+    } else {
+        onChainFields.style.display = 'none';
+    }
 }
 
 function addProduct() {
@@ -15,23 +26,69 @@ function addProduct() {
     var functionCall = document.getElementById('function-call').value;
     var functionDescription = document.getElementById('function-description').value;
 
-    var productList = document.getElementById('product-list');
-    var productItem = document.createElement('div');
-    productItem.className = 'product-item';
-    var productDetails = `<p><strong>${name}</strong> - ${description} (${type}, ${price} ${currency})</p>
-                          <p>Product ID: ${productIdCounter}</p>`;
-    if (type === 'onchain') {
-        productDetails += `<p>Contract Address: ${contractAddress}</p>
-                           <p>Function Call: ${functionCall}</p>
-                           <p>Function Description: ${functionDescription}</p>`;
-    }
-    productDetails += `<button class="delete-button" onclick="deleteItem(this, 'product')">Delete</button>`;
-    productItem.innerHTML = productDetails;
-    productList.appendChild(productItem);
+    var product = {
+        id: productIdCounter,
+        name: name,
+        description: description,
+        type: type,
+        price: price,
+        currency: currency,
+        contractAddress: contractAddress,
+        functionCall: functionCall,
+        functionDescription: functionDescription
+    };
 
+    products.push(product);
     productIdCounter++;
+    renderProductList();
     closeModal('add-product-form');
     clearProductForm();
+}
+
+function editProduct(id) {
+    var product = products.find(p => p.id === id);
+    document.getElementById('product-name').value = product.name;
+    document.getElementById('product-description').value = product.description;
+    document.getElementById('product-type').value = product.type;
+    toggleOnChainFields();
+    document.getElementById('product-price').value = product.price;
+    document.getElementById('product-currency').value = product.currency;
+    document.getElementById('contract-address').value = product.contractAddress;
+    document.getElementById('function-call').value = product.functionCall;
+    document.getElementById('function-description').value = product.functionDescription;
+
+    document.getElementById('add-product-form').style.display = 'block';
+
+    products = products.filter(p => p.id !== id);
+}
+
+function deleteProduct(id) {
+    products = products.filter(p => p.id !== id);
+    renderProductList();
+}
+
+function renderProductList() {
+    var productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    products.forEach(product => {
+        var productItem = document.createElement('tr');
+        var productDetails = `
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.description}</td>
+            <td>${product.type}</td>
+            <td>${product.price} ${product.currency}</td>
+            <td>${product.type === 'onchain' ? product.contractAddress : 'N/A'}</td>
+            <td>${product.type === 'onchain' ? product.functionCall : 'N/A'}</td>
+            <td>${product.type === 'onchain' ? product.functionDescription : 'N/A'}</td>
+            <td>
+                <button class="edit-button" onclick="editProduct(${product.id})">Edit</button>
+                <button class="delete-button" onclick="deleteProduct(${product.id})">Delete</button>
+            </td>`;
+        productItem.innerHTML = productDetails;
+        productList.appendChild(productItem);
+    });
 }
 
 function clearProductForm() {
@@ -48,14 +105,6 @@ function clearProductForm() {
 
 function filterProducts() {
     var searchInput = document.getElementById('product-search').value.toLowerCase();
-    var productList = document.getElementById('product-list').children;
-    for (var i = 0; i < productList.length; i++) {
-        var product = productList[i];
-        var productName = product.querySelector('strong').innerText.toLowerCase();
-        if (productName.includes(searchInput)) {
-            product.style.display = '';
-        } else {
-            product.style.display = 'none';
-        }
-    }
+    var filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchInput));
+    renderProductList(filteredProducts);
 }
