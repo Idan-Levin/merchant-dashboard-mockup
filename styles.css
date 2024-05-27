@@ -12,7 +12,7 @@ body {
 
 .header {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 0;
 }
@@ -21,6 +21,20 @@ body {
     width: 150px;
     height: auto;
     max-width: 100%;
+}
+
+.auth-button {
+    padding: 10px 20px;
+    background-color: #87ceeb;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: #4682b4;
 }
 
 .tabs {
@@ -162,4 +176,45 @@ button:hover {
 
 #commex-policy-list th {
     background-color: #add8e6;
+}
+
+#transaction-list {
+    background-color: #e6f7ff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#analytics-content {
+    background-color: #e6f7ff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #87ceeb;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+.notification.show {
+    display: block;
+}
+
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
 }

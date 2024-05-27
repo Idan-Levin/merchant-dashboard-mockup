@@ -10,15 +10,19 @@
     <div class="container">
         <div class="header">
             <img src="Screenshot 2024-05-27 125632.png" alt="OpenCommerce Logo" class="logo">
+            <button class="auth-button" onclick="authenticate()">Log In</button>
         </div>
         <div class="tabs">
             <button class="tab-button" onclick="showTab('products')">Products</button>
             <button class="tab-button" onclick="showTab('policies')">Policies</button>
             <button class="tab-button" onclick="showTab('commex')">Commex</button>
+            <button class="tab-button" onclick="showTab('history')">Transaction History</button>
+            <button class="tab-button" onclick="showTab('analytics')">Analytics</button>
         </div>
         <div class="content">
             <div id="products" class="tab-content">
                 <h2>Products</h2>
+                <input type="text" id="product-search" oninput="filterProducts()" placeholder="Search products...">
                 <button onclick="showAddProductForm()">Add Product</button>
                 <div id="product-list"></div>
             </div>
@@ -44,8 +48,19 @@
                     <tbody></tbody>
                 </table>
             </div>
+            <div id="history" class="tab-content" style="display:none;">
+                <h2>Transaction History</h2>
+                <div id="transaction-list"></div>
+            </div>
+            <div id="analytics" class="tab-content" style="display:none;">
+                <h2>Analytics</h2>
+                <div id="analytics-content"></div>
+            </div>
         </div>
     </div>
+
+    <div id="notification" class="notification"></div>
+    <div id="loading-indicator" class="loading-indicator">Loading...</div>
 
     <!-- Add Product Form -->
     <div id="add-product-form" class="modal">

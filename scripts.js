@@ -197,7 +197,6 @@ function loadTemplate1() {
     ]
   }
 }`;
-    console.log("Template 1 loaded");
     document.getElementById('commex-script').value = template1;
 }
 
@@ -241,6 +240,90 @@ function loadTemplate2() {
     ]
   }
 }`;
-    console.log("Template 2 loaded");
     document.getElementById('commex-script').value = template2;
 }
+
+function authenticate() {
+    showNotification('User authenticated (mockup mode)');
+}
+
+function showNotification(message) {
+    var notification = document.getElementById('notification');
+    notification.innerText = message;
+    notification.classList.add('show');
+    setTimeout(function() {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+function showLoading() {
+    var loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'block';
+}
+
+function hideLoading() {
+    var loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'none';
+}
+
+// Simulate loading data
+function simulateLoading() {
+    showLoading();
+    setTimeout(hideLoading, 2000); // Hide loading after 2 seconds
+}
+
+function filterProducts() {
+    var searchInput = document.getElementById('product-search').value.toLowerCase();
+    var productList = document.getElementById('product-list').children;
+    for (var i = 0; i < productList.length; i++) {
+        var product = productList[i];
+        var productName = product.querySelector('strong').innerText.toLowerCase();
+        if (productName.includes(searchInput)) {
+            product.style.display = '';
+        } else {
+            product.style.display = 'none';
+        }
+    }
+}
+
+// Sample transaction history data
+var transactions = [
+    { id: 1, product: 'Product A', date: '2024-05-01', amount: '2 ETH' },
+    { id: 2, product: 'Product B', date: '2024-05-02', amount: '1.5 ETH' },
+    { id: 3, product: 'Product C', date: '2024-05-03', amount: '3 ETH' }
+];
+
+// Display transaction history
+function displayTransactionHistory() {
+    var transactionList = document.getElementById('transaction-list');
+    transactions.forEach(function(transaction) {
+        var transactionItem = document.createElement('div');
+        transactionItem.className = 'transaction-item';
+        transactionItem.innerHTML = `<p><strong>${transaction.product}</strong> - ${transaction.date} - ${transaction.amount}</p>`;
+        transactionList.appendChild(transactionItem);
+    });
+}
+
+// Sample analytics data
+var analyticsData = {
+    totalSales: '10 ETH',
+    totalTransactions: 3,
+    mostPopularProduct: 'Product A'
+};
+
+// Display analytics data
+function displayAnalytics() {
+    var analyticsContent = document.getElementById('analytics-content');
+    analyticsContent.innerHTML = `<p>Total Sales: ${analyticsData.totalSales}</p>
+                                  <p>Total Transactions: ${analyticsData.totalTransactions}</p>
+                                  <p>Most Popular Product: ${analyticsData.mostPopularProduct}</p>`;
+}
+
+// Initialize the dashboard
+function initDashboard() {
+    simulateLoading();
+    displayTransactionHistory();
+    displayAnalytics();
+}
+
+document.addEventListener('DOMContentLoaded', initDashboard);
