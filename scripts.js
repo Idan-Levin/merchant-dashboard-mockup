@@ -1,6 +1,29 @@
-let productIdCounter = 1;
-let commexPolicyCounter = 1;
+// Utility Functions
+function showNotification(message) {
+    var notification = document.getElementById('notification');
+    notification.innerText = message;
+    notification.classList.add('show');
+    setTimeout(function() {
+        notification.classList.remove('show');
+    }, 3000);
+}
 
+function showLoading() {
+    var loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'block';
+}
+
+function hideLoading() {
+    var loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'none';
+}
+
+// Authentication
+function authenticate() {
+    showNotification('User authenticated (mockup mode)');
+}
+
+// Tab Management
 function showTab(tabName) {
     var i;
     var tabContent = document.getElementsByClassName("tab-content");
@@ -10,26 +33,11 @@ function showTab(tabName) {
     document.getElementById(tabName).style.display = "block";
 }
 
+// Products
+let productIdCounter = 1;
+
 function showAddProductForm() {
     document.getElementById('add-product-form').style.display = 'block';
-}
-
-function showAddPolicyForm() {
-    document.getElementById('add-policy-form').style.display = 'block';
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-}
-
-function toggleOnChainFields() {
-    var productType = document.getElementById('product-type').value;
-    var onChainFields = document.getElementById('onchain-fields');
-    if (productType === 'onchain') {
-        onChainFields.style.display = 'block';
-    } else {
-        onChainFields.style.display = 'none';
-    }
 }
 
 function addProduct() {
@@ -71,6 +79,25 @@ function clearProductForm() {
     document.getElementById('function-call').value = '';
     document.getElementById('function-description').value = '';
     document.getElementById('onchain-fields').style.display = 'none';
+}
+
+function filterProducts() {
+    var searchInput = document.getElementById('product-search').value.toLowerCase();
+    var productList = document.getElementById('product-list').children;
+    for (var i = 0; i < productList.length; i++) {
+        var product = productList[i];
+        var productName = product.querySelector('strong').innerText.toLowerCase();
+        if (productName.includes(searchInput)) {
+            product.style.display = '';
+        } else {
+            product.style.display = 'none';
+        }
+    }
+}
+
+// Policies
+function showAddPolicyForm() {
+    document.getElementById('add-policy-form').style.display = 'block';
 }
 
 function updatePolicyForm() {
@@ -134,10 +161,8 @@ function clearPolicyForm() {
     updatePolicyForm();
 }
 
-function deleteItem(button, type) {
-    var item = button.parentNode;
-    item.parentNode.removeChild(item);
-}
+// Commex
+let commexPolicyCounter = 1;
 
 function createCommexPolicy() {
     var commexScript = document.getElementById('commex-script').value;
@@ -243,57 +268,13 @@ function loadTemplate2() {
     document.getElementById('commex-script').value = template2;
 }
 
-function authenticate() {
-    showNotification('User authenticated (mockup mode)');
-}
-
-function showNotification(message) {
-    var notification = document.getElementById('notification');
-    notification.innerText = message;
-    notification.classList.add('show');
-    setTimeout(function() {
-        notification.classList.remove('show');
-    }, 3000);
-}
-
-function showLoading() {
-    var loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.display = 'block';
-}
-
-function hideLoading() {
-    var loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.display = 'none';
-}
-
-// Simulate loading data
-function simulateLoading() {
-    showLoading();
-    setTimeout(hideLoading, 2000); // Hide loading after 2 seconds
-}
-
-function filterProducts() {
-    var searchInput = document.getElementById('product-search').value.toLowerCase();
-    var productList = document.getElementById('product-list').children;
-    for (var i = 0; i < productList.length; i++) {
-        var product = productList[i];
-        var productName = product.querySelector('strong').innerText.toLowerCase();
-        if (productName.includes(searchInput)) {
-            product.style.display = '';
-        } else {
-            product.style.display = 'none';
-        }
-    }
-}
-
-// Sample transaction history data
+// Transaction History
 var transactions = [
     { id: 1, product: 'Product A', date: '2024-05-01', amount: '2 ETH' },
     { id: 2, product: 'Product B', date: '2024-05-02', amount: '1.5 ETH' },
     { id: 3, product: 'Product C', date: '2024-05-03', amount: '3 ETH' }
 ];
 
-// Display transaction history
 function displayTransactionHistory() {
     var transactionList = document.getElementById('transaction-list');
     transactions.forEach(function(transaction) {
@@ -304,14 +285,13 @@ function displayTransactionHistory() {
     });
 }
 
-// Sample analytics data
+// Analytics
 var analyticsData = {
     totalSales: '10 ETH',
     totalTransactions: 3,
     mostPopularProduct: 'Product A'
 };
 
-// Display analytics data
 function displayAnalytics() {
     var analyticsContent = document.getElementById('analytics-content');
     analyticsContent.innerHTML = `<p>Total Sales: ${analyticsData.totalSales}</p>
@@ -319,7 +299,7 @@ function displayAnalytics() {
                                   <p>Most Popular Product: ${analyticsData.mostPopularProduct}</p>`;
 }
 
-// Initialize the dashboard
+// Initialization
 function initDashboard() {
     simulateLoading();
     displayTransactionHistory();

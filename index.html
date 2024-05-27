@@ -20,18 +20,18 @@
             <button class="tab-button" onclick="showTab('analytics')">Analytics</button>
         </div>
         <div class="content">
-            <div id="products" class="tab-content">
+            <div id="products" class="tab-content active">
                 <h2>Products</h2>
                 <input type="text" id="product-search" oninput="filterProducts()" placeholder="Search products...">
                 <button onclick="showAddProductForm()">Add Product</button>
                 <div id="product-list"></div>
             </div>
-            <div id="policies" class="tab-content" style="display:none;">
+            <div id="policies" class="tab-content">
                 <h2>Policies</h2>
                 <button onclick="showAddPolicyForm()">Add Policy</button>
                 <div id="policy-list"></div>
             </div>
-            <div id="commex" class="tab-content" style="display:none;">
+            <div id="commex" class="tab-content">
                 <h2>Commex</h2>
                 <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
                 <button onclick="createCommexPolicy()">Create Policy</button>
@@ -48,11 +48,11 @@
                     <tbody></tbody>
                 </table>
             </div>
-            <div id="history" class="tab-content" style="display:none;">
+            <div id="history" class="tab-content">
                 <h2>Transaction History</h2>
                 <div id="transaction-list"></div>
             </div>
-            <div id="analytics" class="tab-content" style="display:none;">
+            <div id="analytics" class="tab-content">
                 <h2>Analytics</h2>
                 <div id="analytics-content"></div>
             </div>
@@ -102,6 +102,15 @@
         </div>
     </div>
 
-    <script src="scripts.js"></script>
+    <!-- Modular Scripts -->
+    <script src="utility.js"></script>
+    <script src="auth.js"></script>
+    <script src="tabs.js"></script>
+    <script src="products.js"></script>
+    <script src="policies.js"></script>
+    <script src="commex.js"></script>
+    <script src="history.js"></script>
+    <script src="analytics.js"></script>
+    <script src="init.js"></script>
 </body>
 </html>

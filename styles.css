@@ -15,6 +15,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    background-color: #c2a8db; /* Purple background */
 }
 
 .logo {
@@ -25,7 +26,7 @@ body {
 
 .auth-button {
     padding: 10px 20px;
-    background-color: #87ceeb;
+    background-color: #6a1b9a; /* Darker purple */
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -34,7 +35,7 @@ body {
 }
 
 .auth-button:hover {
-    background-color: #4682b4;
+    background-color: #4a148c; /* Even darker purple */
 }
 
 .tabs {
@@ -45,7 +46,7 @@ body {
 .tab-button {
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #add8e6;
+    background-color: #ba68c8; /* Light purple */
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -53,7 +54,7 @@ body {
 }
 
 .tab-button:hover {
-    background-color: #87ceeb;
+    background-color: #ab47bc; /* Slightly darker purple */
 }
 
 .content {
@@ -72,7 +73,7 @@ button {
     padding: 10px 20px;
     margin-top: 10px;
     cursor: pointer;
-    background-color: #87ceeb;
+    background-color: #ba68c8; /* Light purple */
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -80,7 +81,7 @@ button {
 }
 
 button:hover {
-    background-color: #4682b4;
+    background-color: #ab47bc; /* Slightly darker purple */
 }
 
 .modal {
@@ -150,7 +151,7 @@ button:hover {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    background-color: #87ceeb;
+    background-color: #ba68c8; /* Light purple */
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -159,7 +160,7 @@ button:hover {
 }
 
 .template-button:hover {
-    background-color: #4682b4;
+    background-color: #ab47bc; /* Slightly darker purple */
 }
 
 #commex-policy-list {
@@ -175,7 +176,7 @@ button:hover {
 }
 
 #commex-policy-list th {
-    background-color: #add8e6;
+    background-color: #ba68c8; /* Light purple */
 }
 
 #transaction-list {
@@ -194,7 +195,7 @@ button:hover {
     position: fixed;
     top: 10px;
     right: 10px;
-    background-color: #87ceeb;
+    background-color: #ba68c8; /* Light purple */
     color: #fff;
     padding: 15px;
     border-radius: 5px;
