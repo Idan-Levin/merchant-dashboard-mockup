@@ -62,13 +62,20 @@
                 <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
                 <button onclick="createCommexPolicy()">Create Policy</button>
                 <h3>Templates</h3>
-                <button class="template-button" onclick="loadTemplate1()">Template 1</button>
-                <button class="template-button" onclick="loadTemplate2()">Template 2</button>
+                <div>
+                    <button class="template-button" onclick="loadTemplate1()">VIP NFT Sale</button>
+                    <button class="template-button" onclick="loadTemplate2()">Wholesale Bulk Purchase</button>
+                    <button class="template-button" onclick="loadTemplate3()">Seasonal Discount</button>
+                    <button class="template-button" onclick="loadTemplate4()">Early Bird Discount</button>
+                    <button class="template-button" onclick="loadTemplate5()">Loyalty Program</button>
+                    <button class="template-button" onclick="loadTemplate6()">Flash Sale</button>
+                </div>
                 <table id="commex-policy-list">
                     <thead>
                         <tr>
                             <th>Policy ID</th>
-                            <th>Commex Script</th>
+                            <th>Policy Name</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

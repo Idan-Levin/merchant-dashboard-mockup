@@ -1,17 +1,10 @@
-// Commex
-let commexPolicyCounter = 1;
-
-function createCommexPolicy() {
-    var commexScript = document.getElementById('commex-script').value;
-    var policyList = document.getElementById('commex-policy-list').querySelector('tbody');
-    var policyItem = document.createElement('tr');
-    policyItem.innerHTML = `<td>${commexPolicyCounter}</td><td>${commexScript}</td>`;
-    policyList.appendChild(policyItem);
-    commexPolicyCounter++;
-}
+// Commex.js
+let commexPolicyIdCounter = 1;
+let commexPolicies = [];
 
 function loadTemplate1() {
-    var template1 = `{
+    document.getElementById('commex-script').value = `
+{
   "Policy": {
     "name": "VIP NFT Sale",
     "conditions": [
@@ -59,11 +52,55 @@ function loadTemplate1() {
     ]
   }
 }`;
-    document.getElementById('commex-script').value = template1;
 }
 
 function loadTemplate2() {
-    var template2 = `{
+    document.getElementById('commex-script').value = `
+{
+  "Policy": {
+    "name": "Wholesale Bulk Purchase",
+    "conditions": [
+      {
+        "type": "MinimumQuantity",
+        "parameters": {
+          "quantity": 100
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "10",
+          "currency": "DAI"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 20
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "DAI"
+        }
+      },
+      {
+        "type": "ComplianceCheck",
+        "parameters": {
+          "required": true
+        }
+      }
+    ]
+  }
+}`;
+}
+
+function loadTemplate3() {
+    document.getElementById('commex-script').value = `
+{
   "Policy": {
     "name": "Seasonal Discount",
     "conditions": [
@@ -98,9 +135,175 @@ function loadTemplate2() {
       {
         "type": "EnforceCompliance",
         "parameters": {}
-        }
+      }
     ]
   }
 }`;
-    document.getElementById('commex-script').value = template2;
+}
+
+function loadTemplate4() {
+    document.getElementById('commex-script').value = `
+{
+  "Policy": {
+    "name": "Early Bird Discount",
+    "conditions": [
+      {
+        "type": "DateRange",
+        "parameters": {
+          "start": "2024-01-01",
+          "end": "2024-01-10"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "75",
+          "currency": "USDC"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 20
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "USDC"
+        }
+      },
+      {
+        "type": "EnforceCompliance",
+        "parameters": {}
+      }
+    ]
+  }
+}`;
+}
+
+function loadTemplate5() {
+    document.getElementById('commex-script').value = `
+{
+  "Policy": {
+    "name": "Loyalty Program",
+    "conditions": [
+      {
+        "type": "TokenOwnership",
+        "parameters": {
+          "token": "LOYALTY",
+          "contractAddress": "0xLoyaltyContractAddress"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "40",
+          "currency": "DAI"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 10
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "DAI"
+        }
+      },
+      {
+        "type": "EnforceCompliance",
+        "parameters": {}
+      }
+    ]
+  }
+}`;
+}
+
+function loadTemplate6() {
+    document.getElementById('commex-script').value = `
+{
+  "Policy": {
+    "name": "Flash Sale",
+    "conditions": [
+      {
+        "type": "DateRange",
+        "parameters": {
+          "start": "2024-07-01",
+          "end": "2024-07-01"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "30",
+          "currency": "ETH"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 50
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "ETH"
+        }
+      },
+      {
+        "type": "EnforceCompliance",
+        "parameters": {}
+      }
+    ]
+  }
+}`;
+}
+
+function createCommexPolicy() {
+    const script = document.getElementById('commex-script').value;
+    const policy = {
+        id: commexPolicyIdCounter,
+        script: script,
+        name: JSON.parse(script).Policy.name
+    };
+    commexPolicies.push(policy);
+    commexPolicyIdCounter++;
+    renderCommexPolicyList();
+    document.getElementById('commex-script').value = '';
+}
+
+function renderCommexPolicyList() {
+    const policyList = document.getElementById('commex-policy-list').querySelector('tbody');
+    policyList.innerHTML = '';
+    commexPolicies.forEach(policy => {
+        const policyItem = document.createElement('tr');
+        policyItem.innerHTML = `
+            <td>${policy.id}</td>
+            <td>${policy.name}</td>
+            <td><button class="view-more-button" onclick="viewMore(${policy.id})">View More</button></td>
+        `;
+        policyList.appendChild(policyItem);
+    });
+}
+
+function viewMore(id) {
+    const policy = commexPolicies.find(p => p.id === id);
+    const policyDetail = document.createElement('div');
+    policyDetail.className = 'policy-detail';
+    policyDetail.innerHTML = `
+        <textarea readonly>${policy.script}</textarea>
+        <button onclick="this.parentElement.remove()">Close</button>
+    `;
+    document.getElementById('commex').appendChild(policyDetail);
 }
