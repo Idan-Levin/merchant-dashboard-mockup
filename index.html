@@ -8,9 +8,13 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <img src="Screenshot 2024-05-27 125632.png" alt="OpenCommerce Logo" class="logo">
+        </div>
         <div class="tabs">
             <button class="tab-button" onclick="showTab('products')">Products</button>
             <button class="tab-button" onclick="showTab('policies')">Policies</button>
+            <button class="tab-button" onclick="showTab('commex')">Commex</button>
         </div>
         <div class="content">
             <div id="products" class="tab-content">
@@ -23,6 +27,23 @@
                 <button onclick="showAddPolicyForm()">Add Policy</button>
                 <div id="policy-list"></div>
             </div>
+            <div id="commex" class="tab-content" style="display:none;">
+                <h2>Commex</h2>
+                <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
+                <button onclick="createCommexPolicy()">Create Policy</button>
+                <h3>Templates</h3>
+                <button class="template-button" onclick="loadTemplate1()">Template 1</button>
+                <button class="template-button" onclick="loadTemplate2()">Template 2</button>
+                <table id="commex-policy-list">
+                    <thead>
+                        <tr>
+                            <th>Policy ID</th>
+                            <th>Commex Script</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -31,7 +52,6 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-product-form')">&times;</span>
             <h3>Add Product</h3>
-            <input type="text" id="product-id" placeholder="Product ID">
             <input type="text" id="product-name" placeholder="Product Name">
             <input type="text" id="product-description" placeholder="Product Description">
             <select id="product-type" onchange="toggleOnChainFields()">

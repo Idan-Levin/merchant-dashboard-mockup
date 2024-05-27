@@ -10,6 +10,18 @@ body {
     margin-top: 50px;
 }
 
+.header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
 .tabs {
     display: flex;
     justify-content: space-around;
@@ -101,4 +113,52 @@ button:hover {
 
 #onchain-fields input {
     margin-top: 5px;
+}
+
+#commex {
+    padding: 20px;
+    background-color: #e0f7fa;
+    border-radius: 10px;
+}
+
+#commex-script {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.template-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #87ceeb;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.template-button:hover {
+    background-color: #4682b4;
+}
+
+#commex-policy-list {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#commex-policy-list th, #commex-policy-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#commex-policy-list th {
+    background-color: #add8e6;
 }

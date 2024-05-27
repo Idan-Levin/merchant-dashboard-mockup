@@ -1,3 +1,6 @@
+let productIdCounter = 1;
+let commexPolicyCounter = 1;
+
 function showTab(tabName) {
     var i;
     var tabContent = document.getElementsByClassName("tab-content");
@@ -30,7 +33,6 @@ function toggleOnChainFields() {
 }
 
 function addProduct() {
-    var id = document.getElementById('product-id').value;
     var name = document.getElementById('product-name').value;
     var description = document.getElementById('product-description').value;
     var type = document.getElementById('product-type').value;
@@ -44,7 +46,7 @@ function addProduct() {
     var productItem = document.createElement('div');
     productItem.className = 'product-item';
     var productDetails = `<p><strong>${name}</strong> - ${description} (${type}, ${price} ${currency})</p>
-                          <p>Product ID: ${id}</p>`;
+                          <p>Product ID: ${productIdCounter}</p>`;
     if (type === 'onchain') {
         productDetails += `<p>Contract Address: ${contractAddress}</p>
                            <p>Function Call: ${functionCall}</p>
@@ -54,12 +56,12 @@ function addProduct() {
     productItem.innerHTML = productDetails;
     productList.appendChild(productItem);
 
+    productIdCounter++;
     closeModal('add-product-form');
     clearProductForm();
 }
 
 function clearProductForm() {
-    document.getElementById('product-id').value = '';
     document.getElementById('product-name').value = '';
     document.getElementById('product-description').value = '';
     document.getElementById('product-type').value = 'offchain';
@@ -86,7 +88,7 @@ function updatePolicyForm() {
         for (var i = 0; i < productList.length; i++) {
             var option = document.createElement('option');
             option.value = productList[i].querySelector('strong').innerText;
-            option.innerHTML = `<input type="checkbox">${productList[i].querySelector('strong').innerText}`;
+            option.innerHTML = productList[i].querySelector('strong').innerText;
             productSelect.appendChild(option);
         }
         policyDetails.appendChild(productSelect);
@@ -135,4 +137,108 @@ function clearPolicyForm() {
 function deleteItem(button, type) {
     var item = button.parentNode;
     item.parentNode.removeChild(item);
+}
+
+function createCommexPolicy() {
+    var commexScript = document.getElementById('commex-script').value;
+    var policyList = document.getElementById('commex-policy-list').querySelector('tbody');
+    var policyItem = document.createElement('tr');
+    policyItem.innerHTML = `<td>${commexPolicyCounter}</td><td>${commexScript}</td>`;
+    policyList.appendChild(policyItem);
+    commexPolicyCounter++;
+}
+
+function loadTemplate1() {
+    var template1 = `{
+  "Policy": {
+    "name": "VIP NFT Sale",
+    "conditions": [
+      {
+        "type": "TokenOwnership",
+        "parameters": {
+          "token": "VIP",
+          "contractAddress": "0xNFTContractAddress"
+        }
+      },
+      {
+        "type": "SaleWindow",
+        "parameters": {
+          "start": "2024-06-01",
+          "end": "2024-06-05"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "1.5",
+          "currency": "ETH"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 15
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "ETH"
+        }
+      },
+      {
+        "type": "SetDeadline",
+        "parameters": {
+          "deadline": "2024-06-06"
+        }
+      }
+    ]
+  }
+}`;
+    document.getElementById('commex-script').value = template1;
+}
+
+function loadTemplate2() {
+    var template2 = `{
+  "Policy": {
+    "name": "Seasonal Discount",
+    "conditions": [
+      {
+        "type": "DateRange",
+        "parameters": {
+          "start": "2024-12-01",
+          "end": "2024-12-25"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "SetPrice",
+        "parameters": {
+          "amount": "50",
+          "currency": "USDC"
+        }
+      },
+      {
+        "type": "ApplyDiscount",
+        "parameters": {
+          "percent": 25
+        }
+      },
+      {
+        "type": "AcceptPayment",
+        "parameters": {
+          "currency": "USDC"
+        }
+      },
+      {
+        "type": "EnforceCompliance",
+        "parameters": {}
+      }
+    ]
+  }
+}`;
+    document.getElementById('commex-script').value = template2;
 }
