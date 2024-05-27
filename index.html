@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('products')">Products</button>
+            <button class="tab-button" onclick="showTab('policies')">Policies</button>
+        </div>
+        <div class="content">
+            <div id="products" class="tab-content">
+                <h2>Products</h2>
+                <button onclick="showAddProductForm()">Add Product</button>
+                <div id="product-list"></div>
+            </div>
+            <div id="policies" class="tab-content" style="display:none;">
+                <h2>Policies</h2>
+                <button onclick="showAddPolicyForm()">Add Policy</button>
+                <div id="policy-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Form -->
+    <div id="add-product-form" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-product-form')">&times;</span>
+            <h3>Add Product</h3>
+            <input type="text" id="product-id" placeholder="Product ID">
+            <input type="text" id="product-name" placeholder="Product Name">
+            <input type="text" id="product-description" placeholder="Product Description">
+            <select id="product-type" onchange="toggleOnChainFields()">
+                <option value="offchain">Off-Chain</option>
+                <option value="onchain">On-Chain</option>
+            </select>
+            <div id="onchain-fields" style="display: none;">
+                <input type="text" id="contract-address" placeholder="Contract Address">
+                <input type="text" id="function-call" placeholder="Function Call">
+                <input type="text" id="function-description" placeholder="Function Call Description">
+            </div>
+            <input type="number" id="product-price" placeholder="Product Price">
+            <select id="product-currency">
+                <option value="ETH">ETH</option>
+                <option value="USDC">USDC</option>
+                <option value="DAI">DAI</option>
+            </select>
+            <button onclick="addProduct()">Save Product</button>
+        </div>
+    </div>
+
+    <!-- Add Policy Form -->
+    <div id="add-policy-form" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-policy-form')">&times;</span>
+            <h3>Add Policy</h3>
+            <select id="policy-type" onchange="updatePolicyForm()">
+                <option value="product">Product-Specific Policy</option>
+                <option value="general">General Policy</option>
+            </select>
+            <div id="policy-details"></div>
+            <button onclick="addPolicy()">Save Policy</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
