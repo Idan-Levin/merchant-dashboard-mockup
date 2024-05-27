@@ -197,6 +197,7 @@ function loadTemplate1() {
     ]
   }
 }`;
+    console.log("Template 1 loaded");
     document.getElementById('commex-script').value = template1;
 }
 
@@ -240,5 +241,6 @@ function loadTemplate2() {
     ]
   }
 }`;
+    console.log("Template 2 loaded");
     document.getElementById('commex-script').value = template2;
 }
