@@ -1,121 +1,175 @@
 let products = [];
 let productIdCounter = 1;
 
+function showAddProductForm() {
+    document.getElementById("add-product-form").style.display = "block";
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
 function addProduct() {
-    const name = document.getElementById('product-name').value;
-    const description = document.getElementById('product-description').value;
-    const type = document.getElementById('product-type').value;
-    const price = document.getElementById('product-price').value;
-    const currency = document.getElementById('product-currency').value;
-    const contractAddress = document.getElementById('contract-address').value || 'N/A';
-    const functionCall = document.getElementById('function-call').value || 'N/A';
-    const functionDescription = document.getElementById('function-description').value || 'N/A';
+    const name = document.getElementById("product-name").value;
+    const description = document.getElementById("product-description").value;
+    const type = document.getElementById("product-type").value;
+    const price = document.getElementById("product-price").value;
+    const currency = document.getElementById("product-currency").value;
+
+    let contractAddress = "N/A";
+    let functionCall = "N/A";
+    let functionDescription = "N/A";
+    let chain = "N/A";
+    let eoaAddress = "N/A";
+
+    if (type === "onchain") {
+        contractAddress = document.getElementById("contract-address").value;
+        functionCall = document.getElementById("function-call").value;
+        functionDescription = document.getElementById("function-description").value;
+        chain = document.getElementById("product-chain-onchain").value;
+    } else if (type === "offchain") {
+        eoaAddress = document.getElementById("eoa-address").value;
+        chain = document.getElementById("product-chain-offchain").value;
+    }
 
     const product = {
-        id: productIdCounter,
-        name,
-        description,
-        type,
-        price,
-        currency,
-        contractAddress,
-        functionCall,
-        functionDescription
+        id: productIdCounter++,
+        name: name,
+        description: description,
+        type: type,
+        price: `${price} ${currency}`,
+        chain: chain,
+        contractAddress: contractAddress,
+        functionCall: functionCall,
+        functionDescription: functionDescription,
+        eoaAddress: eoaAddress
     };
 
     products.push(product);
-    productIdCounter++;
-    renderProductList();
-    closeModal('add-product-form');
-    clearProductForm();
+    closeModal("add-product-form");
+    displayProducts();
 }
 
-function renderProductList() {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
+function displayProducts() {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
 
     products.forEach(product => {
-        const productItem = document.createElement('tr');
-        productItem.innerHTML = `
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.type}</td>
-            <td>${product.price} ${product.currency}</td>
-            <td>${product.contractAddress}</td>
-            <td>${product.functionCall}</td>
-            <td>${product.functionDescription}</td>
-            <td>
-                <button class="edit-button" onclick="editProduct(${product.id})">Edit</button>
-                <button class="delete-button" onclick="deleteProduct(${product.id})">Delete</button>
-            </td>
-        `;
-        productList.appendChild(productItem);
+        const row = document.createElement("tr");
+
+        Object.keys(product).forEach(key => {
+            const cell = document.createElement("td");
+            cell.textContent = product[key];
+            row.appendChild(cell);
+        });
+
+        const actionsCell = document.createElement("td");
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = () => editProduct(product.id);
+        actionsCell.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-button";
+        deleteButton.onclick = () => confirmDeleteProduct(product.id);
+        actionsCell.appendChild(deleteButton);
+
+        row.appendChild(actionsCell);
+        productList.appendChild(row);
     });
 }
 
 function editProduct(productId) {
-    // Implement edit functionality here
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    document.getElementById("product-name").value = product.name;
+    document.getElementById("product-description").value = product.description;
+    document.getElementById("product-type").value = product.type;
+    document.getElementById("product-price").value = parseFloat(product.price);
+    document.getElementById("product-currency").value = product.price.split(" ")[1];
+
+    if (product.type === "onchain") {
+        document.getElementById("contract-address").value = product.contractAddress;
+        document.getElementById("function-call").value = product.functionCall;
+        document.getElementById("function-description").value = product.functionDescription;
+        document.getElementById("product-chain-onchain").value = product.chain;
+        toggleOnChainFields();
+    } else if (product.type === "offchain") {
+        document.getElementById("eoa-address").value = product.eoaAddress;
+        document.getElementById("product-chain-offchain").value = product.chain;
+        toggleOnChainFields();
+    } else {
+        toggleOnChainFields();
+    }
+
+    showAddProductForm();
+    // Remove the old product from the list
+    products = products.filter(p => p.id !== productId);
+}
+
+function confirmDeleteProduct(productId) {
+    if (confirm("Are you sure you want to delete this product?")) {
+        deleteProduct(productId);
+    }
 }
 
 function deleteProduct(productId) {
-    if (confirm('Are you sure you want to delete this product?')) {
-        products = products.filter(product => product.id !== productId);
-        renderProductList();
-    }
+    products = products.filter(p => p.id !== productId);
+    displayProducts();
 }
 
 function toggleOnChainFields() {
-    const productType = document.getElementById('product-type').value;
-    const onchainFields = document.getElementById('onchain-fields');
-    if (productType === 'onchain') {
-        onchainFields.style.display = 'block';
-    } else {
-        onchainFields.style.display = 'none';
-    }
-}
-
-function clearProductForm() {
-    document.getElementById('product-name').value = '';
-    document.getElementById('product-description').value = '';
-    document.getElementById('product-type').value = 'offchain';
-    document.getElementById('contract-address').value = '';
-    document.getElementById('function-call').value = '';
-    document.getElementById('function-description').value = '';
-    document.getElementById('product-price').value = '';
-    document.getElementById('product-currency').value = 'ETH';
-}
-
-function showAddProductForm() {
-    document.getElementById('add-product-form').style.display = 'block';
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    const type = document.getElementById("product-type").value;
+    const onchainFields = document.getElementById("onchain-fields");
+    const offchainFields = document.getElementById("offchain-fields");
+    onchainFields.style.display = type === "onchain" ? "block" : "none";
+    offchainFields.style.display = type === "offchain" ? "block" : "none";
 }
 
 function filterProducts() {
-    const searchValue = document.getElementById('product-search').value.toLowerCase();
-    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchValue));
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
+    const searchValue = document.getElementById("product-search").value.toLowerCase();
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchValue) ||
+        product.description.toLowerCase().includes(searchValue)
+    );
+
+    displayFilteredProducts(filteredProducts);
+}
+
+function displayFilteredProducts(filteredProducts) {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
 
     filteredProducts.forEach(product => {
-        const productItem = document.createElement('tr');
-        productItem.innerHTML = `
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.type}</td>
-            <td>${product.price} ${product.currency}</td>
-            <td>${product.contractAddress}</td>
-            <td>${product.functionCall}</td>
-            <td>${product.functionDescription}</td>
-            <td>
-                <button class="edit-button" onclick="editProduct(${product.id})">Edit</button>
-                <button class="delete-button" onclick="deleteProduct(${product.id})">Delete</button>
-            </td>
-        `;
-        productList.appendChild(productItem);
+        const row = document.createElement("tr");
+
+        Object.keys(product).forEach(key => {
+            const cell = document.createElement("td");
+            cell.textContent = product[key];
+            row.appendChild(cell);
+        });
+
+        const actionsCell = document.createElement("td");
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = () => editProduct(product.id);
+        actionsCell.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-button";
+        deleteButton.onclick = () => confirmDeleteProduct(product.id);
+        actionsCell.appendChild(deleteButton);
+
+        row.appendChild(actionsCell);
+        productList.appendChild(row);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    displayProducts();
+});

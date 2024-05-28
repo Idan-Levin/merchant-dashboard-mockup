@@ -34,10 +34,11 @@
                             <th>Description</th>
                             <th>Type</th>
                             <th>Price</th>
+                            <th>Chain</th>
                             <th>Contract Address</th>
                             <th>Function Call</th>
                             <th>Function Description</th>
-                            <th>Actions</th>
+                            <th>EOA Address</th>
                         </tr>
                     </thead>
                     <tbody id="product-list"></tbody>
@@ -96,6 +97,19 @@
                 <input type="text" id="contract-address" placeholder="Contract Address">
                 <input type="text" id="function-call" placeholder="Function Call">
                 <input type="text" id="function-description" placeholder="Function Call Description">
+                <select id="product-chain-onchain">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="polygon">Polygon</option>
+                    <option value="base">Base</option>
+                </select>
+            </div>
+            <div id="offchain-fields" style="display: none;">
+                <input type="text" id="eoa-address" placeholder="EOA Address">
+                <select id="product-chain-offchain">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="polygon">Polygon</option>
+                    <option value="base">Base</option>
+                </select>
             </div>
             <input type="number" id="product-price" placeholder="Product Price">
             <select id="product-currency">
