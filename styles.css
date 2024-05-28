@@ -35,7 +35,7 @@ body {
     font-size: 1em;
     padding: 5px 10px;
     border: 2px solid #000;
-    background-color: #FFD700;
+    background-color: #ADD8E6; /* Light blue */
     border-radius: 5px;
     cursor: pointer;
 }
@@ -52,7 +52,7 @@ body {
     font-size: 1em;
     padding: 10px 20px;
     border: 2px solid #000;
-    background-color: #FFF;
+    background-color: #ADD8E6; /* Light blue */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -60,7 +60,7 @@ body {
 }
 
 .tab-button:hover {
-    background-color: #FFD700;
+    background-color: #87CEEB; /* Lighter blue */
 }
 
 .tab-content {
@@ -89,14 +89,14 @@ button {
     font-size: 1em;
     padding: 5px 10px;
     border: 2px solid #000;
-    background-color: #FFD700;
+    background-color: #ADD8E6; /* Light blue */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #FFA500;
+    background-color: #87CEEB; /* Lighter blue */
 }
 
 table {
@@ -196,14 +196,14 @@ input, select, textarea {
     padding: 5px 10px;
     margin-right: 5px;
     border: 2px solid #000;
-    background-color: #FFD700;
+    background-color: #ADD8E6; /* Light blue */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .template-button:hover {
-    background-color: #FFA500;
+    background-color: #87CEEB; /* Lighter blue */
 }
 
 .policy-detail {
@@ -218,14 +218,14 @@ input, select, textarea {
     font-size: 0.9em;
     padding: 5px 10px;
     border: 2px solid #000;
-    background-color: #FFD700;
+    background-color: #ADD8E6; /* Light blue */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .close-button:hover {
-    background-color: #FFA500;
+    background-color: #87CEEB; /* Lighter blue */
 }
 
 /* Responsive Design */
