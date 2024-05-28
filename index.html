@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchant Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
 </head>
 <body>
     <div class="container">
@@ -15,7 +16,7 @@
         <div class="tabs">
             <button class="tab-button" onclick="showTab('products')">Products</button>
             <button class="tab-button" onclick="showTab('policies')">Policies</button>
-            <button class="tab-button" onclick="showTab('commex')">Commex</button>
+            <button class="tab-button" onclick="showTab('hooks')">Hooks</button>
             <button class="tab-button" onclick="showTab('history')">Transaction History</button>
             <button class="tab-button" onclick="showTab('analytics')">Analytics</button>
         </div>
@@ -44,6 +45,8 @@
             <div id="policies" class="tab-content">
                 <h2>Policies</h2>
                 <button onclick="showAddPolicyForm()">Add Policy</button>
+                <button onclick="showAddCommexForm()">Add Commex Policy</button>
+                <button onclick="exportPolicies()">Export Policies</button>
                 <table>
                     <thead>
                         <tr>
@@ -57,29 +60,11 @@
                     <tbody id="policy-list"></tbody>
                 </table>
             </div>
-            <div id="commex" class="tab-content">
-                <h2>Commex</h2>
-                <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
-                <button onclick="createCommexPolicy()">Create Policy</button>
-                <h3>Templates</h3>
-                <div>
-                    <button class="template-button" onclick="loadTemplate1()">VIP NFT Sale</button>
-                    <button class="template-button" onclick="loadTemplate2()">Wholesale Bulk Purchase</button>
-                    <button class="template-button" onclick="loadTemplate3()">Seasonal Discount</button>
-                    <button class="template-button" onclick="loadTemplate4()">Early Bird Discount</button>
-                    <button class="template-button" onclick="loadTemplate5()">Loyalty Program</button>
-                    <button class="template-button" onclick="loadTemplate6()">Flash Sale</button>
-                </div>
-                <table id="commex-policy-list">
-                    <thead>
-                        <tr>
-                            <th>Policy ID</th>
-                            <th>Policy Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div id="hooks" class="tab-content">
+                <h2>Hooks</h2>
+                <p>Hooks are calls that get emitted at the end of the purchase, and can trigger onchain actions like NFT mints or calls to other contracts.</p>
+                <button onclick="showAddHookForm()">Add Hook</button>
+                <div id="hook-list"></div>
             </div>
             <div id="history" class="tab-content">
                 <h2>Transaction History</h2>
@@ -129,9 +114,44 @@
             <select id="policy-type" onchange="updatePolicyForm()">
                 <option value="product">Product-Specific Policy</option>
                 <option value="general">General Policy</option>
+                <option value="multiplayer">Multiplayer Mode Policy</option>
             </select>
             <div id="policy-details"></div>
             <button onclick="addPolicy()">Save Policy</button>
+        </div>
+    </div>
+
+    <!-- Add Commex Policy Form -->
+    <div id="add-commex-form" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-commex-form')">&times;</span>
+            <h3>Add Commex Policy</h3>
+            <input type="text" id="commex-policy-name" placeholder="Write the name of the Commex policy here">
+            <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
+            <button onclick="createCommexPolicy()">Create Policy</button>
+            <h3>Templates</h3>
+            <div>
+                <button class="template-button" onclick="loadTemplate1()">VIP NFT Sale</button>
+                <button class="template-button" onclick="loadTemplate2()">Wholesale Bulk Purchase</button>
+                <button class="template-button" onclick="loadTemplate3()">Seasonal Discount</button>
+                <button class="template-button" onclick="loadTemplate4()">Early Bird Discount</button>
+                <button class="template-button" onclick="loadTemplate5()">Loyalty Program</button>
+                <button class="template-button" onclick="loadTemplate6()">Flash Sale</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Hook Form -->
+    <div id="add-hook-form" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-hook-form')">&times;</span>
+            <h3>Add Hook</h3>
+            <input type="text" id="hook-name" placeholder="Hook Name">
+            <input type="text" id="hook-id" placeholder="Hook ID">
+            <input type="text" id="hook-contract-address" placeholder="Contract Address">
+            <input type="text" id="hook-function-call" placeholder="Function Call">
+            <input type="text" id="hook-function-description" placeholder="Function Call Description">
+            <button onclick="addHook()">Save Hook</button>
         </div>
     </div>
 
@@ -142,6 +162,7 @@
     <script src="products.js"></script>
     <script src="policies.js"></script>
     <script src="commex.js"></script>
+    <script src="hooks.js"></script>
     <script src="history.js"></script>
     <script src="analytics.js"></script>
     <script src="init.js"></script>

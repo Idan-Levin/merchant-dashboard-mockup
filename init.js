@@ -1,8 +1,9 @@
-// Initialization
-function initDashboard() {
-    simulateLoading();
-    displayTransactionHistory();
-    displayAnalytics();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the product list and policy list
+    renderProductList();
+    renderPolicyList();
+    renderCommexPolicyList();
 
-document.addEventListener('DOMContentLoaded', initDashboard);
+    // Set default active tab
+    showTab('products');
+});

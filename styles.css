@@ -1,286 +1,226 @@
-body {
-    font-family: 'Roboto', sans-serif !important;
-    background-color: #f0f8ff;
-    color: #333;
-}
+/* Balsamiq Mockups-inspired CSS */
 
-/* Ensure all text elements use Roboto */
-h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea {
-    font-family: 'Roboto', sans-serif !important;
+body {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    background-color: #F7F9FC;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     width: 80%;
-    margin: auto;
-    margin-top: 50px;
+    margin: 0 auto;
+    padding-top: 20px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    background-color: #FFFAF0;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
 }
 
 .logo {
-    width: 150px;
+    width: 150px;  /* Adjust the width */
     height: auto;
-    max-width: 100%;
 }
 
 .auth-button {
-    padding: 10px 20px;
-    background-color: #1e88e5; /* Darker blue */
-    border: none;
+    font-family: inherit;
+    font-size: 1em;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    background-color: #FFD700;
     border-radius: 5px;
-    color: #fff;
-    font-weight: bold;
     cursor: pointer;
-}
-
-.auth-button:hover {
-    background-color: #1565c0; /* Even darker blue */
 }
 
 .tabs {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .tab-button {
+    font-family: inherit;
+    font-size: 1em;
     padding: 10px 20px;
-    cursor: pointer;
-    background-color: #42a5f5; /* Light blue */
-    border: none;
+    border: 2px solid #000;
+    background-color: #FFF;
     border-radius: 5px;
-    font-weight: bold;
-    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .tab-button:hover {
-    background-color: #1e88e5; /* Slightly darker blue */
-}
-
-.content {
-    margin-top: 20px;
+    background-color: #FFD700;
 }
 
 .tab-content {
     display: none;
+    background-color: #FFF;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px #888888;
 }
 
 .tab-content.active {
     display: block;
 }
 
+h2 {
+    font-family: inherit;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-decoration: underline;
+}
+
 button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    background-color: #42a5f5; /* Light blue */
-    border: none;
+    font-family: inherit;
+    font-size: 1em;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    background-color: #FFD700;
     border-radius: 5px;
-    color: #fff;
-    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #1e88e5; /* Slightly darker blue */
+    background-color: #FFA500;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 2px solid #000;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #FFFAF0;
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 1em;
+    padding: 5px;
+    border: 2px solid #000;
+    background-color: #FFF;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .modal {
     display: none;
     position: fixed;
-    top: 0;
+    z-index: 1;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
-    background: white;
-    margin: 10% auto;
+    background-color: #FFFAF0;
+    margin: 15% auto;
     padding: 20px;
-    width: 50%;
-    position: relative;
+    border: 2px solid #000;
     border-radius: 10px;
+    width: 80%;
+    box-shadow: 5px 5px #888888;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-.product-item, .policy-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.delete-button {
-    background: #ff6b6b; /* Brighter red */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.delete-button:hover {
-    background: #ff4c4c; /* Slightly darker bright red */
-}
-
-.edit-button {
-    background: #42a5f5; /* Light blue */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.edit-button:hover {
-    background: #1e88e5; /* Slightly darker blue */
-}
-
-#onchain-fields input {
-    margin-top: 5px;
-}
-
-#commex {
-    padding: 20px;
-    background-color: #e3f2fd; /* Very light blue */
-    border-radius: 10px;
-}
-
-#commex-script {
-    width: 100%;
-    height: 200px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.template-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #42a5f5; /* Light blue */
-    border: none;
-    border-radius: 5px;
-    color: #fff;
+    color: #000;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #FF0000;
     cursor: pointer;
-}
-
-.template-button:hover {
-    background-color: #1e88e5; /* Slightly darker blue */
-}
-
-#commex-policy-list {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-}
-
-#commex-policy-list th, #commex-policy-list td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
-
-#commex-policy-list th {
-    background-color: #42a5f5; /* Light blue */
-}
-
-.policy-detail {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.policy-detail textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-#transaction-list {
-    background-color: #e3f2fd; /* Very light blue */
-    border-radius: 10px;
-    padding: 20px;
-}
-
-#analytics-content {
-    background-color: #e3f2fd; /* Very light blue */
-    border-radius: 10px;
-    padding: 20px;
 }
 
 .notification {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #42a5f5; /* Light blue */
-    color: #fff;
-    padding: 15px;
+    background-color: #FFD700;
+    border: 2px solid #000;
     border-radius: 5px;
+    padding: 10px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
     display: none;
-    z-index: 1000;
-}
-
-.notification.show {
-    display: block;
 }
 
 .loading-indicator {
+    display: none;
+    font-size: 1.2em;
+    color: #000;
+    background-color: #FFFAF0;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.75);
-    color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    display: none;
-    z-index: 1000;
 }
 
-/* Table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
+.template-button {
+    font-family: inherit;
     font-size: 0.9em;
-    margin-top: 20px; /* Added space before the table */
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: 2px solid #000;
+    background-color: #FFD700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.template-button:hover {
+    background-color: #FFA500;
 }
 
-th {
-    background-color: #42a5f5; /* Light blue */
-    color: white;
+.policy-detail {
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.close-button {
+    font-family: inherit;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    background-color: #FFD700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-tr:hover {
-    background-color: #ddd;
+.close-button:hover {
+    background-color: #FFA500;
 }

@@ -1,59 +1,23 @@
-// Policies
-let policyIdCounter = 1;
 let policies = [];
-
-function showAddPolicyForm() {
-    document.getElementById('add-policy-form').style.display = 'block';
-}
-
-function updatePolicyForm() {
-    var policyType = document.getElementById('policy-type').value;
-    var policyDetails = document.getElementById('policy-details');
-    policyDetails.innerHTML = '';
-
-    if (policyType === 'product') {
-        var productSelect = document.createElement('select');
-        productSelect.id = 'policy-products';
-        productSelect.multiple = true; // Allow multiple selection
-        productSelect.style.height = '100px'; // To show multiple options
-        // Dynamically populate with existing products
-        products.forEach(product => {
-            var option = document.createElement('option');
-            option.value = product.id;
-            option.innerHTML = product.name;
-            productSelect.appendChild(option);
-        });
-        policyDetails.appendChild(productSelect);
-
-        var policyDetailInput = document.createElement('input');
-        policyDetailInput.type = 'text';
-        policyDetailInput.id = 'policy-detail';
-        policyDetailInput.placeholder = 'Policy Detail';
-        policyDetails.appendChild(policyDetailInput);
-    } else {
-        var policyDetailInput = document.createElement('input');
-        policyDetailInput.type = 'text';
-        policyDetailInput.id = 'policy-detail';
-        policyDetailInput.placeholder = 'Policy Detail';
-        policyDetails.appendChild(policyDetailInput);
-    }
-}
+let policyIdCounter = 1;
 
 function addPolicy() {
-    var policyType = document.getElementById('policy-type').value;
-    var policyDetail = document.getElementById('policy-detail').value;
+    const policyType = document.getElementById('policy-type').value;
+    let policyDetail = document.getElementById('policy-detail') ? document.getElementById('policy-detail').value : '';
+    let selectedProducts = [];
 
-    var policy = {
+    if (policyType === 'product') {
+        selectedProducts = Array.from(document.getElementById('policy-products').selectedOptions).map(option => option.value);
+    } else if (policyType === 'multiplayer') {
+        policyDetail = document.getElementById('multiplayer-options').value;
+    }
+
+    const policy = {
         id: policyIdCounter,
         type: policyType,
         detail: policyDetail,
-        products: []
+        products: selectedProducts
     };
-
-    if (policyType === 'product') {
-        var selectedProducts = Array.from(document.getElementById('policy-products').selectedOptions);
-        policy.products = selectedProducts.map(option => option.value);
-    }
 
     policies.push(policy);
     policyIdCounter++;
@@ -62,53 +26,119 @@ function addPolicy() {
     clearPolicyForm();
 }
 
-function editPolicy(id) {
-    var policy = policies.find(p => p.id === id);
-    document.getElementById('policy-type').value = policy.type;
-    updatePolicyForm();
-    document.getElementById('policy-detail').value = policy.detail;
-
-    if (policy.type === 'product') {
-        var productSelect = document.getElementById('policy-products');
-        policy.products.forEach(productId => {
-            var option = productSelect.querySelector(`option[value="${productId}"]`);
-            if (option) {
-                option.selected = true;
-            }
-        });
-    }
-
-    document.getElementById('add-policy-form').style.display = 'block';
-
-    policies = policies.filter(p => p.id !== id);
-}
-
-function deletePolicy(id) {
-    policies = policies.filter(p => p.id !== id);
-    renderPolicyList();
-}
-
 function renderPolicyList() {
-    var policyList = document.getElementById('policy-list');
+    const policyList = document.getElementById('policy-list');
     policyList.innerHTML = '';
 
     policies.forEach(policy => {
-        var policyItem = document.createElement('tr');
-        var policyDetails = `
+        const policyItem = document.createElement('tr');
+        policyItem.innerHTML = `
             <td>${policy.id}</td>
             <td>${policy.type}</td>
             <td>${policy.detail}</td>
-            <td>${policy.type === 'product' ? policy.products.map(id => products.find(p => p.id === id).name).join(', ') : 'N/A'}</td>
+            <td>${policy.products.join(', ')}</td>
             <td>
                 <button class="edit-button" onclick="editPolicy(${policy.id})">Edit</button>
                 <button class="delete-button" onclick="deletePolicy(${policy.id})">Delete</button>
-            </td>`;
-        policyItem.innerHTML = policyDetails;
+            </td>
+        `;
         policyList.appendChild(policyItem);
     });
 }
 
+function editPolicy(policyId) {
+    // Implement edit functionality here
+}
+
+function deletePolicy(policyId) {
+    if (confirm('Are you sure you want to delete this policy?')) {
+        policies = policies.filter(policy => policy.id !== policyId);
+        renderPolicyList();
+    }
+}
+
+function updatePolicyForm() {
+    const policyType = document.getElementById('policy-type').value;
+    const policyDetails = document.getElementById('policy-details');
+    policyDetails.innerHTML = '';
+
+    if (policyType === 'product') {
+        const productSelect = document.createElement('select');
+        productSelect.id = 'policy-products';
+        productSelect.multiple = true;
+        productSelect.style.height = '100px';
+
+        products.forEach(product => {
+            const option = document.createElement('option');
+            option.value = product.id;
+            option.innerHTML = product.name;
+            productSelect.appendChild(option);
+        });
+        policyDetails.appendChild(productSelect);
+
+        const policyDetailInput = document.createElement('input');
+        policyDetailInput.type = 'text';
+        policyDetailInput.id = 'policy-detail';
+        policyDetailInput.placeholder = 'Policy Detail';
+        policyDetails.appendChild(policyDetailInput);
+    } else if (policyType === 'multiplayer') {
+        const multiplayerSelect = document.createElement('select');
+        multiplayerSelect.id = 'multiplayer-options';
+        const options = ['Degen Club', 'Pudgy Penguin Club', 'Farcaster Cool Kids Club'];
+        options.forEach(optionName => {
+            const option = document.createElement('option');
+            option.value = optionName;
+            option.innerHTML = optionName;
+            multiplayerSelect.appendChild(option);
+        });
+        policyDetails.appendChild(multiplayerSelect);
+    } else {
+        const policyDetailInput = document.createElement('input');
+        policyDetailInput.type = 'text';
+        policyDetailInput.id = 'policy-detail';
+        policyDetailInput.placeholder = 'Policy Detail';
+        policyDetails.appendChild(policyDetailInput);
+    }
+}
+
 function clearPolicyForm() {
     document.getElementById('policy-type').value = 'product';
-    updatePolicyForm();
+    document.getElementById('policy-details').innerHTML = '';
+}
+
+function showAddPolicyForm() {
+    document.getElementById('add-policy-form').style.display = 'block';
+    updatePolicyForm(); // Update the form fields when the form is shown
+}
+
+function showAddCommexForm() {
+    document.getElementById('add-commex-form').style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function exportPolicies() {
+    const headers = ['ID', 'Type', 'Detail', 'Products'];
+    const rows = policies.map(policy => [
+        policy.id,
+        policy.type,
+        policy.detail,
+        policy.products.join(', ')
+    ]);
+
+    let csvContent = "data:text/csv;charset=utf-8," 
+        + headers.join(',') 
+        + "\n" 
+        + rows.map(row => row.join(',')).join('\n');
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'policies.csv');
+    document.body.appendChild(link);
+
+    link.click();
+    document.body.removeChild(link);
 }
