@@ -1,5 +1,3 @@
-/* Balsamiq Mockups-inspired CSS */
-
 body {
     font-family: 'Comic Neue', cursive, sans-serif;
     background-color: #F7F9FC;
@@ -93,6 +91,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 5px;
 }
 
 button:hover {
@@ -266,4 +265,134 @@ input, select, textarea {
         font-size: 0.9em;
         padding: 5px 8px;
     }
+}
+
+.policy-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.policy-field label {
+    margin-right: 10px;
+}
+
+.sub-field {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.modal-content input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.modal-content button {
+    background-color: #ADD8E6; /* Light blue */
+    color: #000;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 2px solid #000;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal-content button:hover {
+    background-color: #87CEEB; /* Lighter blue */
+}
+
+.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: #FFF;
+    border: 2px solid #000;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* Ensures proper alignment */
+}
+
+input[type="checkbox"]:checked {
+    background-color: #ADD8E6; /* Light blue */
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #000;
+}
+
+.policy-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.policy-field label {
+    margin-right: 10px;
+}
+
+.sub-field {
+    margin-left: 30px; /* Increased for better alignment */
+    margin-bottom: 10px;
+}
+
+.template-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+    justify-content: center; /* Center the buttons horizontally */
+}
+
+.template-button {
+    flex: 1 1 calc(33.333% - 10px); /* Adjust the width of buttons as needed */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }

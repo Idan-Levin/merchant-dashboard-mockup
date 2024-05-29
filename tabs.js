@@ -1,8 +1,8 @@
-function showTab(tabId) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => {
+// Tab Management
+function showTab(tabName) {
+    const tabContents = document.getElementsByClassName("tab-content");
+    Array.from(tabContents).forEach(tab => {
         tab.classList.remove('active');
     });
-
-    document.getElementById(tabId).classList.add('active');
+    document.getElementById(tabName).classList.add('active');
 }

@@ -2,11 +2,7 @@ let products = [];
 let productIdCounter = 1;
 
 function showAddProductForm() {
-    document.getElementById("add-product-form").style.display = "block";
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
+    document.getElementById('add-product-form').style.display = 'block';
 }
 
 function addProduct() {
@@ -101,12 +97,9 @@ function editProduct(productId) {
         document.getElementById("eoa-address").value = product.eoaAddress;
         document.getElementById("product-chain-offchain").value = product.chain;
         toggleOnChainFields();
-    } else {
-        toggleOnChainFields();
     }
 
     showAddProductForm();
-    // Remove the old product from the list
     products = products.filter(p => p.id !== productId);
 }
 
@@ -123,10 +116,8 @@ function deleteProduct(productId) {
 
 function toggleOnChainFields() {
     const type = document.getElementById("product-type").value;
-    const onchainFields = document.getElementById("onchain-fields");
-    const offchainFields = document.getElementById("offchain-fields");
-    onchainFields.style.display = type === "onchain" ? "block" : "none";
-    offchainFields.style.display = type === "offchain" ? "block" : "none";
+    document.getElementById("onchain-fields").style.display = type === "onchain" ? "block" : "none";
+    document.getElementById("offchain-fields").style.display = type === "offchain" ? "block" : "none";
 }
 
 function filterProducts() {
@@ -135,7 +126,6 @@ function filterProducts() {
         product.name.toLowerCase().includes(searchValue) ||
         product.description.toLowerCase().includes(searchValue)
     );
-
     displayFilteredProducts(filteredProducts);
 }
 
@@ -169,7 +159,3 @@ function displayFilteredProducts(filteredProducts) {
         productList.appendChild(row);
     });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    displayProducts();
-});

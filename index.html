@@ -38,7 +38,7 @@
                             <th>Contract Address</th>
                             <th>Function Call</th>
                             <th>Function Description</th>
-                            <th>EOA Address</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="product-list"></tbody>
@@ -47,7 +47,6 @@
             <div id="policies" class="tab-content">
                 <h2>Policies</h2>
                 <button onclick="showAddPolicyForm()">Add Policy</button>
-                <button onclick="showAddCommexForm()">Add Commex Policy</button>
                 <button onclick="exportPolicies()">Export Policies</button>
                 <table>
                     <thead>
@@ -125,12 +124,16 @@
     <div id="add-policy-form" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-policy-form')">&times;</span>
-            <h3>Add Policy</h3>
-            <select id="policy-type" onchange="updatePolicyForm()">
-                <option value="product">Product-Specific Policy</option>
-                <option value="general">General Policy</option>
-                <option value="multiplayer">Multiplayer Mode Policy</option>
-            </select>
+            <h2>Add Policy</h2>
+            <div>
+                <label for="policy-type">Policy Type:</label>
+                <select id="policy-type" onchange="updatePolicyForm()">
+                    <option value="general">General Policy</option>
+                    <option value="product">Product-Specific Policy</option>
+                    <option value="multiplayer">Multiplayer Mode Policy</option>
+                    <option value="commex">Commex Policy</option>
+                </select>
+            </div>
             <div id="policy-details"></div>
             <button onclick="addPolicy()">Save Policy</button>
         </div>
