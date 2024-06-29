@@ -1,8 +1,16 @@
-/* Balsamiq Mockups-inspired CSS */
+/* reset.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Teachers', sans-serif;
+}
+
+/* styles.css */
 
 body {
-    font-family: 'Comic Neue', cursive, sans-serif;
-    background-color: #F7F9FC;
+    font-family: 'Teachers', sans-serif;
+    background-color: #fff;
     color: #333;
     margin: 0;
     padding: 0;
@@ -18,9 +26,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFFAF0;
-    border: 2px solid #000;
-    border-radius: 10px;
+    background-color: #e0e0e0;
+    color: #fff;
     padding: 10px 20px;
     margin-bottom: 20px;
 }
@@ -34,10 +41,16 @@ body {
     font-family: inherit;
     font-size: 1em;
     padding: 5px 10px;
-    border: 2px solid #000;
-    background-color: #ADD8E6; /* Light blue */
-    border-radius: 5px;
+    border: none;
+    background-color: #6200ea;
+    color: #fff;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+    background-color: #3700b3;
 }
 
 .tabs {
@@ -51,25 +64,32 @@ body {
     font-family: inherit;
     font-size: 1em;
     padding: 10px 20px;
-    border: 2px solid #000;
-    background-color: #ADD8E6; /* Light blue */
-    border-radius: 5px;
+    border: none;
+    background-color: #e0e0e0;
+    color: #333;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 5px;
 }
 
+.tab-button.active {
+    background-color: #6200ea;
+    color: #fff;
+}
+
 .tab-button:hover {
-    background-color: #87CEEB; /* Lighter blue */
+    background-color: #3700b3;
+    color: #fff;
 }
 
 .tab-content {
     display: none;
-    background-color: #FFF;
-    border: 2px solid #000;
-    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     padding: 20px;
-    box-shadow: 5px 5px #888888;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tab-content.active {
@@ -80,23 +100,30 @@ h2 {
     font-family: inherit;
     font-size: 1.5em;
     margin-bottom: 20px;
-    text-align: center;
-    text-decoration: underline;
+    text-align: left;
+    color: #000;
 }
 
 button {
     font-family: inherit;
     font-size: 1em;
     padding: 5px 10px;
-    border: 2px solid #000;
-    background-color: #ADD8E6; /* Light blue */
-    border-radius: 5px;
+    border: none;
+    background-color: #6200ea;
+    color: #fff;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 5px;
 }
 
 button:hover {
-    background-color: #87CEEB; /* Lighter blue */
+    background-color: #3700b3;
+}
+
+.table-container {
+    width: 100%;
+    margin: 20px 0;
 }
 
 table {
@@ -106,7 +133,7 @@ table {
 }
 
 table, th, td {
-    border: 2px solid #000;
+    border: 1px solid #ddd;
 }
 
 th, td {
@@ -115,15 +142,15 @@ th, td {
 }
 
 th {
-    background-color: #FFFAF0;
+    background-color: #f4f4f4;
 }
 
 input, select, textarea {
     font-family: inherit;
     font-size: 1em;
     padding: 5px;
-    border: 2px solid #000;
-    background-color: #FFF;
+    border: 1px solid #ddd;
+    background-color: #fff;
     border-radius: 5px;
     margin-bottom: 10px;
     width: 100%;
@@ -142,14 +169,14 @@ input, select, textarea {
 }
 
 .modal-content {
-    background-color: #FFFAF0;
+    background-color: #fff;
     margin: 15% auto;
     padding: 20px;
-    border: 2px solid #000;
-    border-radius: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     width: 80%;
     max-width: 600px;
-    box-shadow: 5px 5px #888888;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .close {
@@ -161,13 +188,13 @@ input, select, textarea {
 
 .close:hover,
 .close:focus {
-    color: #FF0000;
+    color: #f00;
     cursor: pointer;
 }
 
 .notification {
-    background-color: #FFD700;
-    border: 2px solid #000;
+    background-color: #ffd700;
+    border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
     position: fixed;
@@ -180,8 +207,8 @@ input, select, textarea {
     display: none;
     font-size: 1.2em;
     color: #000;
-    background-color: #FFFAF0;
-    border: 2px solid #000;
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
     position: fixed;
@@ -190,24 +217,8 @@ input, select, textarea {
     transform: translate(-50%, -50%);
 }
 
-.template-button {
-    font-family: inherit;
-    font-size: 0.9em;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border: 2px solid #000;
-    background-color: #ADD8E6; /* Light blue */
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.template-button:hover {
-    background-color: #87CEEB; /* Lighter blue */
-}
-
 .policy-detail {
-    border: 2px solid #000;
+    border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0;
@@ -217,15 +228,16 @@ input, select, textarea {
     font-family: inherit;
     font-size: 0.9em;
     padding: 5px 10px;
-    border: 2px solid #000;
-    background-color: #ADD8E6; /* Light blue */
-    border-radius: 5px;
+    border: none;
+    background-color: #6200ea;
+    color: #fff;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .close-button:hover {
-    background-color: #87CEEB; /* Lighter blue */
+    background-color: #3700b3;
 }
 
 /* Responsive Design */
@@ -266,4 +278,107 @@ input, select, textarea {
         font-size: 0.9em;
         padding: 5px 8px;
     }
+}
+
+.policy-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.policy-field label {
+    margin-right: 10px;
+}
+
+.sub-field {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.modal-content input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.modal-content button {
+    background-color: #6200ea;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #3700b3;
+}
+
+.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* Ensures proper alignment */
+}
+
+input[type="checkbox"]:checked {
+    background-color: #6200ea;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #fff;
 }

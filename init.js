@@ -1,9 +1,7 @@
+// init.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize the product list and policy list
-    renderProductList();
-    renderPolicyList();
+    renderPolicies();
     renderCommexPolicyList();
-
-    // Set default active tab
-    showTab('products');
+    displayProducts();  // Changed from renderProductList to displayProducts
+    document.getElementById('policy-type').addEventListener('change', updatePolicyForm);
 });

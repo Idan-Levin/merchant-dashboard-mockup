@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchant Dashboard</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teachers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -15,7 +16,7 @@
             <button class="auth-button" onclick="authenticate()">Log In</button>
         </div>
         <div class="tabs">
-            <button class="tab-button" onclick="showTab('products')">Products</button>
+            <button class="tab-button active" onclick="showTab('products')">Products</button>
             <button class="tab-button" onclick="showTab('policies')">Policies</button>
             <button class="tab-button" onclick="showTab('hooks')">Hooks</button>
             <button class="tab-button" onclick="showTab('history')">Transaction History</button>
@@ -38,7 +39,7 @@
                             <th>Contract Address</th>
                             <th>Function Call</th>
                             <th>Function Description</th>
-                            <th>EOA Address</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="product-list"></tbody>
@@ -125,12 +126,15 @@
     <div id="add-policy-form" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-policy-form')">&times;</span>
-            <h3>Add Policy</h3>
-            <select id="policy-type" onchange="updatePolicyForm()">
-                <option value="product">Product-Specific Policy</option>
-                <option value="general">General Policy</option>
-                <option value="multiplayer">Multiplayer Mode Policy</option>
-            </select>
+            <h2>Add Policy</h2>
+            <div>
+                <label for="policy-type">Policy Type:</label>
+                <select id="policy-type" onchange="updatePolicyForm()">
+                    <option value="general">General Policy</option>
+                    <option value="product">Product-Specific Policy</option>
+                    <option value="multiplayer">Multiplayer Mode Policy</option>
+                </select>
+            </div>
             <div id="policy-details"></div>
             <button onclick="addPolicy()">Save Policy</button>
         </div>
