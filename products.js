@@ -5,12 +5,22 @@ function showAddProductForm() {
     document.getElementById('add-product-form').style.display = 'block';
 }
 
+function showAddPolicyForm() {
+    document.getElementById('add-policy-form').style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
 function addProduct() {
     const name = document.getElementById("product-name").value;
     const description = document.getElementById("product-description").value;
     const type = document.getElementById("product-type").value;
     const price = document.getElementById("product-price").value;
     const currency = document.getElementById("product-currency").value;
+    const discount = document.getElementById("product-discount").value;
+    const quantityDiscount = document.getElementById("product-quantity-discount").value;
 
     let contractAddress = "N/A";
     let functionCall = "N/A";
@@ -34,6 +44,8 @@ function addProduct() {
         description: description,
         type: type,
         price: `${price} ${currency}`,
+        discount: `${discount}%`,
+        quantityDiscount: `${quantityDiscount}%`,
         chain: chain,
         contractAddress: contractAddress,
         functionCall: functionCall,
@@ -86,6 +98,8 @@ function editProduct(productId) {
     document.getElementById("product-type").value = product.type;
     document.getElementById("product-price").value = parseFloat(product.price);
     document.getElementById("product-currency").value = product.price.split(" ")[1];
+    document.getElementById("product-discount").value = parseFloat(product.discount);
+    document.getElementById("product-quantity-discount").value = parseFloat(product.quantityDiscount);
 
     if (product.type === "onchain") {
         document.getElementById("contract-address").value = product.contractAddress;

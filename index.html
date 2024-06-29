@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchant Dashboard</title>
-    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Teachers&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -35,10 +34,14 @@
                             <th>Description</th>
                             <th>Type</th>
                             <th>Price</th>
+                            <th>Currency</th>
+                            <th>Discount</th>
+                            <th>Quantity Discount</th>
                             <th>Chain</th>
                             <th>Contract Address</th>
                             <th>Function Call</th>
                             <th>Function Description</th>
+                            <th>EOA Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -118,6 +121,8 @@
                 <option value="USDC">USDC</option>
                 <option value="DAI">DAI</option>
             </select>
+            <input type="number" id="product-discount" placeholder="Discount (%)">
+            <input type="number" id="product-quantity-discount" placeholder="Quantity Discount (%)">
             <button onclick="addProduct()">Save Product</button>
         </div>
     </div>
