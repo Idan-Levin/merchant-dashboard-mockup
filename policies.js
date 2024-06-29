@@ -42,6 +42,22 @@ function addPolicy() {
         policyDetail = {
             multiplayerPolicy: getElementValue('multiplayer-policy')
         };
+<<<<<<< HEAD
+=======
+    } else if (policyType === 'commex') {
+        const name = document.getElementById('commex-policy-name').value;
+        const script = document.getElementById('commex-script').value;
+
+        if (!name || !script) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        policyDetail = {
+            name,
+            script
+        };
+>>>>>>> 2f0bfda34bbe94d8234722ec892ad9acdc679d3f
     }
 
     const newPolicy = {
@@ -52,6 +68,7 @@ function addPolicy() {
     };
 
     policies.push(newPolicy);
+<<<<<<< HEAD
     console.log('Policy added:', newPolicy); // Debugging line
 
     closeModal('add-policy-form');
@@ -59,6 +76,14 @@ function addPolicy() {
     renderPolicies();
 }
 
+=======
+    closeModal('add-policy-form');
+    renderPolicies();
+}
+
+
+
+>>>>>>> 2f0bfda34bbe94d8234722ec892ad9acdc679d3f
 function getElementValue(id) {
     const element = document.getElementById(id);
     return element ? element.value : null;
@@ -213,6 +238,29 @@ function updatePolicyForm() {
                 </select>
             </div>
         `;
+<<<<<<< HEAD
+=======
+    } else if (policyType === 'commex') {
+        policyDetails.innerHTML = `
+            <div class="policy-field">
+                <label for="commex-policy-name">Commex Policy Name:</label>
+                <input type="text" id="commex-policy-name" placeholder="Write the name of the Commex policy here">
+            </div>
+            <div class="policy-field">
+                <label for="commex-script">Commex Script:</label>
+                <textarea id="commex-script" placeholder="Write your Commex script here..."></textarea>
+            </div>
+            <div class="policy-field">
+                <label>Templates:</label>
+                <button class="template-button" onclick="loadTemplate1()">VIP NFT Sale</button>
+                <button class="template-button" onclick="loadTemplate2()">Wholesale Bulk Purchase</button>
+                <button class="template-button" onclick="loadTemplate3()">Seasonal Discount</button>
+                <button class="template-button" onclick="loadTemplate4()">Early Bird Discount</button>
+                <button class="template-button" onclick="loadTemplate5()">Loyalty Program</button>
+                <button class="template-button" onclick="loadTemplate6()">Flash Sale</button>
+            </div>
+        `;
+>>>>>>> 2f0bfda34bbe94d8234722ec892ad9acdc679d3f
     }
 
     if (!document.querySelector('#policy-details + button')) {
@@ -223,6 +271,11 @@ function updatePolicyForm() {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2f0bfda34bbe94d8234722ec892ad9acdc679d3f
 function toggleDiscountFields() {
     const discountChecked = document.getElementById('discount').checked;
     document.getElementById('discount-fields').style.display = discountChecked ? 'block' : 'none';
